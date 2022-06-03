@@ -1,4 +1,5 @@
-let list = document.querySelector("ul");
+let list = document.querySelector("ul"),
+    i;
 let listChildren = list.childNodes;
 console.log(listChildren);
 listChildren.forEach((element) => {
@@ -17,12 +18,14 @@ listChildren.forEach((element) => {
         } else alert(element.textContent);
     });
 });
+//
+// Input select Logique
 let title = document.querySelector("h1");
 let newDiv = document.createElement("div");
 let select = document.createElement("select");
 document.body.insertBefore(newDiv, list);
 newDiv.appendChild(select);
-let arraySelect = ["important franchise", "normal franchise"];
+let arraySelect = ["normal franchise", "important franchise"];
 console.log(select);
 for (let i = 0; i < arraySelect.length; i++) {
     let option = document.createElement("option");
@@ -31,7 +34,6 @@ for (let i = 0; i < arraySelect.length; i++) {
     select.appendChild(option);
 }
 let li = document.querySelectorAll("li");
-console.log(li);
 
 function addActivityItem() {
     li.forEach((li) => {
@@ -40,15 +42,13 @@ function addActivityItem() {
         }
     });
 }
-
-select.addEventListener("click", function () {
-    var options = document.body.querySelectorAll("option");
-    var count = options.length;
-    if (typeof count === "undefined" || count < 2) {
-        addActivityItem();
-    }
-});
-
+// select.addEventListener("click", function () {
+//     var options = document.body.querySelectorAll("option");
+//     var count = options.length;
+//     if (typeof count === "undefined" || count < 2) {
+//         addActivityItem();
+//     }
+// });
 select.addEventListener("change", function () {
     if (select.value == "important franchise") {
         addActivityItem();
@@ -58,45 +58,28 @@ select.addEventListener("change", function () {
         });
     }
 });
-
-let array = [];
-// let newArray = [];
-li.forEach((li) => {
-    if (li.classList != "important") {
-        array.push(li);
+//
+// -> Rendre la liste aléatoire sauf pour fast&furious
+document.body.addEventListener("keypress", () => {
+    if (event.code == "KeyR") {
+        for (i = list.children.length; i >= 0; i--) {
+            console.log(list.firstElementChild);
+            list.appendChild(list.children[(Math.random() * i) | 1]);
+        }
     }
 });
-console.log(array);
-const randomGenerator = (n) => {
-    return Math.floor(Math.random() * n);
-};
-const randomizeCast = () => {
-    // https://bost.ocks.org/mike/shuffle/
-    let numberOfCharacters = array.length,
-        t;
-    const newArray = array;
-    while (numberOfCharacters != 0) {
-        let randomIndex = randomGenerator(numberOfCharacters--);
-        t = newArray[numberOfCharacters];
-        newArray[numberOfCharacters] = newArray[randomIndex];
-        newArray[randomIndex] = t;
+
+document.body.addEventListener("keypress", () => {
+    if (event.code == "KeyD") {
+        let firstChild = list.firstElementChild;
+        firstChildClone = firstChild.cloneNode(true);
+        console.log(firstChildClone);
+        firstChild.appendChild(firstChildClone);
     }
-    for (let i = 0; i < newArray.length; i++) {
-        console.log(li);
-        li.forEach((li) => {
-            // li.textContent = newArray[i].value;
-        });
-        console.log(li.textContent);
-        console.log(newArray[i].textContent);
-        // li.textContent = newArray[i].textContent;
-    }
-};
-// for (let i = 0; i < newArray.length; i++) {
-//     li.forEach((li) => {
-//         if (li.classList != "important") {
-//             li.textContent = newArray[i];
-//         }
-//     });
-// }
-// console.log(newArray);
-randomizeCast();
+});
+console.log(list.children[1].isEqualNode(list.children[3]));
+function remove(a, b) {
+    a.isEqualNode(b) ? a.remove() : null;
+}
+remove(list.children[1], list.children[3]);
+console.log(list.children);
