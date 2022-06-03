@@ -1,4 +1,11 @@
-//
+let backgroundColor = () => {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+
+    const color = `rgb(${r},${g},${b})`;
+    body.style.background = color;
+};
 const importantElement = document.querySelectorAll(".important");
 importantElement.forEach(function (p) {
     p.title = "this is an important item";
@@ -22,10 +29,3 @@ paragraphs.forEach(function (item) {
     const colorRandom = `rgb(${r},${g},${b})`;
     if (item.classList != "important") item.style.color = colorRandom;
 });
-//
-//
-// const paragraphsImportant = document.querySelectorAll("p.important");
-// paragraphsImportant.forEach((p) => {
-//     p.style.color = "black";
-// });
-// console.log(paragraphsImportant);
