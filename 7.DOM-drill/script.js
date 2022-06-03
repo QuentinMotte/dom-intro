@@ -7,7 +7,7 @@ listChildren.forEach((element) => {
         element.classList.add("important");
         let fastAndFurious = element;
         console.log(fastAndFurious);
-        list.firstElementChild.replaceWith(fastAndFurious);
+        list.replaceChild(fastAndFurious, list.firstElementChild);
     }
 
     element.addEventListener("click", () => {
@@ -82,4 +82,5 @@ function remove(a, b) {
     a.isEqualNode(b) ? a.remove() : null;
 }
 remove(list.children[1], list.children[3]);
+remove(list.children[1], list.children[8]);
 console.log(list.children);
