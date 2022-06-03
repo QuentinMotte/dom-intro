@@ -33,8 +33,8 @@ for (let i = 0; i < arraySelect.length; i++) {
     option.text = arraySelect[i];
     select.appendChild(option);
 }
+//
 let li = document.querySelectorAll("li");
-
 function addActivityItem() {
     li.forEach((li) => {
         if (li.classList != "important") {
@@ -42,13 +42,6 @@ function addActivityItem() {
         }
     });
 }
-// select.addEventListener("click", function () {
-//     var options = document.body.querySelectorAll("option");
-//     var count = options.length;
-//     if (typeof count === "undefined" || count < 2) {
-//         addActivityItem();
-//     }
-// });
 select.addEventListener("change", function () {
     if (select.value == "important franchise") {
         addActivityItem();
@@ -68,13 +61,14 @@ document.body.addEventListener("keypress", () => {
         }
     }
 });
-
+playOne = true;
 document.body.addEventListener("keypress", () => {
-    if (event.code == "KeyD") {
+    if (event.code == "KeyD" && playOne) {
         let firstChild = list.firstElementChild;
         firstChildClone = firstChild.cloneNode(true);
         console.log(firstChildClone);
         firstChild.appendChild(firstChildClone);
+        playOne = false;
     }
 });
 console.log(list.children[1].isEqualNode(list.children[3]));
